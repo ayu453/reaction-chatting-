@@ -28,5 +28,5 @@ test("scores are deterministic and bounded", () => {
 
 test("does not mutate the curated catalog", () => {
   assert.equal(Object.isFrozen(engine.catalog), true);
-  assert.equal(Object.isFrozen(engine.catalog[0]), false);
+  assert.equal(Object.isFrozen(engine.catalog[0]), true);
 });
