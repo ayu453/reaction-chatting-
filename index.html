@@ -20,7 +20,7 @@
       <label class="search-box"><span>⌕</span><input id="friendSearch" placeholder="Find a friend..." autocomplete="off"></label>
       <div class="filter-tabs"><button class="filter-tab active" data-filter="all">All <b>4</b></button><button class="filter-tab" data-filter="unread">Unread <b>2</b></button></div>
       <div class="friend-list" id="friendList"><div class="friend-empty">Your accepted friends will appear here.</div></div>
-      <div class="sidebar-bottom"><div class="mini-status"><span class="pulse"></span><span><strong>Reaction engine</strong><small>Local mode · ready</small></span><span class="toggle on" aria-label="Reaction engine enabled"><i></i></span></div><div class="side-links"><button>⚙ Settings</button><button>♡ Invite friends</button></div><div class="privacy-note" id="connectionNote">Connected to your private chat space.</div></div>
+      <div class="sidebar-bottom"><div class="mini-status"><span class="pulse"></span><span><strong>Song moments</strong><small>Message-matched · 10 seconds</small></span><span class="toggle on" aria-label="Reaction engine enabled"><i></i></span></div><div class="side-links"><button>⚙ Settings</button><button>♡ Invite friends</button></div><div class="privacy-note" id="connectionNote">Connected to your private chat space.</div></div>
     </aside>
 
     <main class="chat-area">
@@ -32,7 +32,6 @@
       </header>
 
       <section class="conversation" id="conversation">
-        <div class="chat-reaction-atmosphere" id="chatReactionAtmosphere" aria-hidden="true"><span class="atmosphere-glow"></span><span class="atmosphere-symbol"></span><span class="atmosphere-spark atmosphere-spark-one">✦</span><span class="atmosphere-spark atmosphere-spark-two">✧</span></div>
         <div class="date-divider"><span>TODAY, 10:42 AM</span></div>
         <div class="day-note">You and Maya have been friends for 2 years ✨</div>
         <div class="message-row received"><div class="avatar avatar-maya tiny-avatar">M</div><div class="message-stack"><span class="sender">Maya</span><div class="bubble">okay I have a VERY important question</div><time>10:42</time></div></div>
@@ -44,7 +43,7 @@
         <div class="typing-indicator" id="typingIndicator" hidden><span class="avatar avatar-maya tiny-avatar">M</span><span class="typing-dots"><i></i><i></i><i></i></span><small>Maya is typing</small></div>
       </section>
 
-      <div class="composer-wrap"><div class="composer-tools"><button title="Add attachment">＋</button><button title="GIFs">GIF</button><button title="Stickers">▧</button></div><form class="composer" id="messageForm"><textarea id="messageInput" rows="1" placeholder="Write something worth reacting to..." aria-label="Write a message"></textarea><button type="button" class="emoji-button" id="emojiButton" title="Add emoji">☺</button><button type="submit" class="send-button" aria-label="Send message">↑</button></form><div class="composer-hint">Enter to send <span>·</span> Shift + Enter for a new line</div></div>
+      <div class="composer-wrap"><div class="composer-tools"><button title="Add attachment">＋</button><button title="GIFs">GIF</button><button title="Stickers">▧</button></div><form class="composer" id="messageForm"><textarea id="messageInput" rows="1" placeholder="Write something worth reacting to..." aria-label="Write a message"></textarea><button type="button" class="emoji-button" id="emojiButton" title="Add emoji">☺</button><button type="submit" class="send-button" aria-label="Send message">↑</button></form><div class="composer-hint">Enter to send <span>·</span> Shift + Enter for a new line <span>·</span> <span id="songStatus" class="song-status">Tap once to enable 10-sec songs</span></div></div>
     </main>
 
 
@@ -52,6 +51,7 @@
   <div class="people-overlay" id="peopleOverlay" hidden><section class="people-dialog" role="dialog" aria-modal="true" aria-labelledby="peopleTitle"><header><div><span class="auth-eyebrow">GROW YOUR CIRCLE</span><h2 id="peopleTitle">Find your people</h2></div><button class="icon-button" id="closePeople" aria-label="Close">×</button></header><label class="search-box people-search"><span>⌕</span><input id="peopleSearch" placeholder="Search by username…" autocomplete="off"></label><div class="people-results" id="peopleResults"><p class="people-empty">Search by username to find a friend.</p></div><div class="incoming-title">FRIEND REQUESTS <span id="requestCount">0</span></div><div class="people-results" id="incomingRequests"><p class="people-empty">No new requests.</p></div></section></div><div class="toast" id="toast" role="status"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script><script src="supabase-client.js"></script><script src="reaction-media.js"></script><script src="reaction-visuals.js"></script>
   <script src="reaction-engine.js"></script>
+  <script src="song-engine.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
