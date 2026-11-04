@@ -30,3 +30,5 @@ $("#newChat").addEventListener("click",async()=>{$("#peopleOverlay").hidden=fals
 $("#openSidebar").addEventListener("click",()=>$(".sidebar").classList.add("open"));$("#closeSidebar").addEventListener("click",()=>$(".sidebar").classList.remove("open"));$("#conversation").addEventListener("click",()=>$(".sidebar").classList.remove("open"));
 async function init(){if(!db){setAuthMessage("Supabase client failed to load. Refresh and try again.",true);return;}const {data:{session}}=await db.auth.getSession();if(session)await boot(session.user);else{$("#authScreen").hidden=false;$("#appShell").hidden=true;}db.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_IN"&&session&&!currentUser)boot(session.user);});}
 init();
+
+const reactionToggle=$("#toggleReactions");if(reactionToggle){reactionToggle.addEventListener("click",()=>{const rail=$(".reaction-rail"),open=rail.classList.toggle("open");reactionToggle.setAttribute("aria-expanded",String(open));reactionToggle.setAttribute("aria-label",open?"Close reactions":"Open reactions");});}
