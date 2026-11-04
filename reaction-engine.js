@@ -20,6 +20,8 @@
     { id: "big-yes", patterns: [/\b(wow|amazing|incredible|awesome|perfect|fantastic|brilliant)\b/i, /✨|🤩/], weight: 2, emoji: "✨", tag: "THE SPARK", title: "Big yes energy", text: "Some moments deserve extra sparkle.", feed: "Big yes energy", why: "Excitement detected", mediaType: "visual" }
   ];
 
+  catalog.forEach(item => { Object.freeze(item.patterns); Object.freeze(item); });
+
   const fallback = { id: "little-moment", emoji: "✨", tag: "THE SPARK", title: "A little moment", text: "Every conversation has its own rhythm.", feed: "A little moment", why: "A new moment in the conversation", mediaType: "visual" };
 
   function scoreReaction(message) {
