@@ -36,7 +36,8 @@ function renderChat(id){
  activeId=id;const p=profiles[id];$('#chatName').textContent=p.name;$('#chatStatus').textContent=p.status;
  const avatar=$('.header-avatar');avatar.className='avatar header-avatar '+p.avatar;avatar.textContent=p.initial;
  $('#conversation').innerHTML='<div class="date-divider"><span>TODAY</span></div><div class="day-note">This is your space with '+escapeHTML(p.name.split(' ')[0])+' ✨</div>'+p.messages.map((m,i)=>messageHTML(m,i,p)).join('');
- $$('.friend').forEach(b=>b.classList.toggle('active',b.dataset.id===id));$('#conversation').scrollTop=$('#conversation').scrollHeight;
+ const latest=p.messages[p.messages.length-1];if(latest){const reaction=classify(latest[2]);updateMediaStatus(reaction);renderVisualReaction(reaction);$('#ambientEmoji').textContent=reaction.emoji;$('#ambientTag').textContent=reaction.tag;$('#ambientTitle').textContent=reaction.title;$('#ambientText').textContent=reaction.text;}
+ $('.friend').forEach(b=>b.classList.toggle('active',b.dataset.id===id));$('#conversation').scrollTop=$('#conversation').scrollHeight;
 }
 function messageHTML(m,i,p){const [dir,sender,body,time]=m;return '<div class="message-row '+(dir==='out'?'sent':'received')+'">'+(dir==='in'?'<div class="avatar tiny-avatar '+p.avatar+'">'+p.initial+'</div>':'')+'<div class="message-stack">'+(sender?'<span class="sender">'+escapeHTML(sender)+'</span>':'')+'<div class="bubble">'+escapeHTML(body)+'</div><time>'+time+(dir==='out'?' <span class="read-check">✓✓</span>':'')+'</time></div></div>';}
 function showToast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2200);}
