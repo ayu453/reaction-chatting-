@@ -1,0 +1,9 @@
+const test=require("node:test");
+const assert=require("node:assert/strict");
+const {classifySong}=require("./song-engine.js");
+test("romantic Hinglish message selects romantic music",()=>assert.equal(classifySong("Tumhari bahut yaad aa rahi hai ❤️")?.id,"romantic"));
+test("sad Hinglish message selects comfort music",()=>assert.equal(classifySong("Aaj mood off hai, bahut tension hai")?.id,"comfort"));
+test("achievement message selects celebration music",()=>assert.equal(classifySong("Bhai tu jeet gaya! 🏆")?.id,"celebration"));
+test("joke message selects playful music",()=>assert.equal(classifySong("Yaar kya mast joke tha 😂")?.id,"playful"));
+test("ordinary message does not force a song",()=>assert.equal(classifySong("Kal kitne baje milna hai?"),null));
+test("empty text does not select a song",()=>assert.equal(classifySong(""),null));
