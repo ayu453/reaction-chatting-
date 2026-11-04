@@ -9,6 +9,7 @@ Open `index.html` in a browser. No build step is required. To run the engine tes
 - Responsive three-panel chat interface with a contacts list, conversation and reaction rail.
 - Local demo conversations and message composer.
 - A standalone local-first hybrid reaction engine with weighted context matching and a curated, media-ready reaction catalog.
+- A media slot contract for ambient visuals, animations, meme cards, audio and short video, plus a non-intrusive media status panel and explicit tap-to-play audio hook.
 - Automated Node.js tests for reaction matching, fallback behavior and deterministic scoring.
 - Reactions appear in the dedicated ambient panel and reaction feed — never on top of message bubbles.
 - Mobile contacts drawer and friend filtering.
@@ -21,7 +22,7 @@ Open `index.html` in a browser. No build step is required. To run the engine tes
 ## Current limitations
 - This is a UI prototype. Messages are held in browser memory and reset on refresh.
 - No database, authentication, real friend requests, cross-device sync, or real-time transport is connected yet.
-- The AI assist and real media asset library are not connected. The current engine uses local weighted rules and emoji/ambient visual treatments as placeholders. The catalog marks audio-ready reactions, but no audio or external media is played yet.
+- AI assist and licensed media files are not connected yet. The catalog and UI now support media slots, but the slots remain empty until approved assets are added. Audio never auto-plays; it requires a user tap.
 
 ## Next milestones
 1. Refine the reaction library and background presentation.
