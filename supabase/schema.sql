@@ -120,3 +120,4 @@ grant select, update on public.profiles to authenticated;
 grant select, insert, update, delete on public.friend_requests to authenticated;
 grant select, insert on public.messages to authenticated;
 alter publication supabase_realtime add table public.messages;
+alter publication supabase_realtime add table public.friend_requests;
