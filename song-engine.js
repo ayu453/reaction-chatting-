@@ -36,6 +36,7 @@
         unlocked=context.state==="running";
         if(unlocked){
           root.document?.removeEventListener("pointerdown",unlock,true);
+          root.document?.removeEventListener("touchend",unlock,true);
           root.document?.removeEventListener("keydown",unlock,true);
           say("10-second song moments enabled");
           if(pending){const next=pending;pending=null;play(next);}
@@ -44,6 +45,7 @@
     }
     if(root.document){
       root.document.addEventListener("pointerdown",unlock,true);
+      root.document.addEventListener("touchend",unlock,{capture:true,passive:true});
       root.document.addEventListener("keydown",unlock,true);
     }
     function tone(frequency,start,duration,wave,volume){
@@ -64,12 +66,12 @@
       const start=context.currentTime+.06,step=2.5;
       theme.chords.forEach((chord,bar)=>{
         const at=start+bar*step;
-        chord.forEach((hz,index)=>tone(hz,at,2.44,"sine",index===0 ? 0.026 : 0.014));
-        tone(chord[0]/2,at,2.44,"sine",.045);
+        chord.forEach((hz,index)=>tone(hz,at,2.44,"sine",index===0 ? 0.075 : 0.045));
+        tone(chord[0]/2,at,2.44,"sine",.075);
       });
       theme.melody.forEach((hz,index)=>{
         const at=start+index*.6;
-        tone(hz,at,.43,theme.wave,.047);
+        tone(hz,at,.43,theme.wave,.12);
       });
       say("♫ "+theme.id+" · 10 seconds");
       return true;
