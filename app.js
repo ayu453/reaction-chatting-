@@ -2,7 +2,7 @@ const $=(s,root=document)=>root.querySelector(s),$$=(s,root=document)=>[...root.
 const db=window.afterglowSupabase;
 let currentUser=null,currentProfile=null,activeFriend=null,activeChannel=null,friendChannel=null,toastTimer,authMode="signin",friends=[];
 function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-const songPlayer=window.AfterglowSongEngine.createPlayer(message=>{const el=$("#songStatus");if(el)el.textContent=message;});
+const songEngine=window.AfterglowSongEngine;const songPlayer=songEngine&&typeof songEngine.createPlayer==="function"?songEngine.createPlayer(message=>{const el=$("#songStatus");if(el)el.textContent=message;}):{unlock(){},playMessage(){return false;},stop(){}};
 function playMessageSong(text){songPlayer.playMessage(text);}
 function showToast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600);}
 function setAuthMessage(m,error=false){const e=$("#authMessage");e.textContent=m;e.classList.toggle("error",error);}
