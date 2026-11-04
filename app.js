@@ -6,22 +6,9 @@ const profiles = {
   zoya:{name:'Zoya Khan',initial:'Z',avatar:'avatar-zoya',status:'Active 12 min ago',messages:[['in','Zoya','send me the playlist!!','09:31'],['out','','Making you a dangerously good one.','09:32']]},
   noah:{name:'Noah Williams',initial:'N',avatar:'avatar-noah',status:'Last seen yesterday',messages:[['in','Noah','Movie night this weekend?','Yesterday'],['out','','haha deal','Yesterday']]}
 };
-const reactions = [
- {test:/\b(sea|ocean|beach|waves|coast|holiday|travel)\b/i,emoji:'🌊',tag:'THE VIBE',title:'Coastal daydream',text:'Somewhere salty, sunny and far away.',feed:'Coastal daydream',why:'Picked up on a little escape'},
- {test:/\b(cafe|coffee|tea|toast|bakery|café)\b/i,emoji:'☕',tag:'THE VIBE',title:'Little café energy',text:'Slow mornings and one more cup.',feed:'Little café energy',why:'A cosy plan is brewing'},
- {test:/😭|\b(lol|lmao|haha|hilarious|dying|funny)\b/i,emoji:'😭',tag:'THE MOOD',title:'Crying-laughing hours',text:'This conversation has lost all seriousness.',feed:'Crying-laughing hours',why:'Humour detected in the chat'},
- {test:/\b(love|miss you|proud|thank you|thanks|appreciate)\b/i,emoji:'💗',tag:'THE FEELING',title:'Soft spot unlocked',text:'A little warmth goes a long way.',feed:'Soft spot unlocked',why:'A kind moment deserves a glow'},
- {test:/\b(game|level|win|won|beat|score|let’s go|lets go)\b/i,emoji:'🎮',tag:'THE HYPE',title:'Main character victory',text:'That deserves a tiny victory lap.',feed:'Main character victory',why:'Celebration mode activated'},
- {test:/\b(music|song|playlist|sing|dance)\b/i,emoji:'🎧',tag:'THE SOUND',title:'Soundtrack moment',text:'Every good conversation needs a track.',feed:'Soundtrack moment',why:'Music energy detected'},
- {test:/\b(sorry|sad|rough|tired|stress|stressed|bad day)\b/i,emoji:'🫶',tag:'THE FEELING',title:'A little comfort',text:'No fixing. Just being here.',feed:'A little comfort',why:'A softer moment in the chat'},
- {test:/\b(wow|amazing|incredible|awesome|perfect|yes!)\b/i,emoji:'✨',tag:'THE SPARK',title:'Big yes energy',text:'Some moments deserve extra sparkle.',feed:'Big yes energy',why:'Excitement detected'}
-];
 let activeId='maya', toastTimer;
 function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function classify(text){
- const hit=reactions.find(r=>r.test.test(text));
- return hit || {emoji:'✨',tag:'THE SPARK',title:'A little moment',text:'Every conversation has its own rhythm.',feed:'A little moment',why:'A new moment in the conversation'};
-}
+function classify(text){ return window.AfterglowReactionEngine.classify(text); }
 function updateReaction(text){
  const r=classify(text);
  $('#ambientEmoji').textContent=r.emoji; $('#ambientTag').textContent=r.tag; $('#ambientTitle').textContent=r.title; $('#ambientText').textContent=r.text;
