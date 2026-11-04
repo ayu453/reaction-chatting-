@@ -28,7 +28,7 @@ RLS is enabled on every public table. The browser uses only the publishable key.
 **Email confirmation:** hosted Supabase projects commonly require users to confirm their email before first sign-in. Set the Supabase Auth Site URL and Redirect URLs to the actual hosted Afterglow URL before inviting users to register.
 
 ## Tests
-Use Node.js 20+:
+GitHub Actions checks the browser JavaScript syntax and runs the reaction engine/visual tests on pushes to `main` and pull requests. Use Node.js 20+ locally:
 ```sh
 node --check app.js
 node --test reaction-engine.test.js reaction-visuals.test.js
