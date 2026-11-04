@@ -20,5 +20,28 @@ $("#messageInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKe
 $("#friendSearch").addEventListener("input",e=>{const q=e.target.value.toLowerCase();$$(".friend").forEach(b=>b.hidden=!b.textContent.toLowerCase().includes(q));});$$(".filter-tab").forEach(b=>b.addEventListener("click",()=>{$$(".filter-tab").forEach(t=>t.classList.toggle("active",t===b));$$(".friend").forEach(f=>f.hidden=b.dataset.filter==="unread");}));
 $("#newChat").addEventListener("click",async()=>{$("#peopleOverlay").hidden=false;$("#peopleSearch").value="";$("#peopleResults").innerHTML='<p class="people-empty">Search by username to find a friend.</p>';await loadIncomingRequests();$("#peopleSearch").focus();});$("#closePeople").addEventListener("click",()=>$("#peopleOverlay").hidden=true);$("#peopleOverlay").addEventListener("click",e=>{if(e.target.id==="peopleOverlay")$("#peopleOverlay").hidden=true;});$("#peopleSearch").addEventListener("input",e=>searchPeople(e.target.value));$("#incomingRequests").addEventListener("click",async e=>{const b=e.target.closest("[data-request]");if(!b)return;b.disabled=true;const {error}=await db.from("friend_requests").update({status:"accepted"}).eq("id",b.dataset.request);if(error){showToast(friendlyError(error));b.disabled=false;return;}showToast("You're friends now.");await loadIncomingRequests();await loadFriends();});
 $("#openSidebar").addEventListener("click",()=>$(".sidebar").classList.add("open"));$("#closeSidebar").addEventListener("click",()=>$(".sidebar").classList.remove("open"));$("#conversation").addEventListener("click",()=>$(".sidebar").classList.remove("open"));
-async function init(){if(!db){setAuthMessage("Supabase client failed to load. Refresh and try again.",true);return;}const {data:{session}}=await db.auth.getSession();if(session)await boot(session.user);else{$("#authScreen").hidden=false;$("#appShell").hidden=true;}db.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_IN"&&session&&!currentUser)boot(session.user);});}
+async function init(){
+  if(!db){showToast("Chat service couldn't connect. Refresh and try again.");return;}
+  let {data:{session}}=await db.auth.getSession();
+  if(!session){
+    const storageKey="afterglow_guest_identity";
+    let identity;
+    try{identity=JSON.parse(localStorage.getItem(storageKey)||"null");}catch{}
+    if(!identity||!identity.username||!identity.display_name){
+      const suffix=Math.random().toString(36).slice(2,9);
+      identity={username:"guest_"+suffix,display_name:"Guest "+suffix.slice(0,4).toUpperCase()};
+      try{localStorage.setItem(storageKey,JSON.stringify(identity));}catch{}
+    }
+    const {data,error}=await db.auth.signInAnonymously({options:{data:identity}});
+    if(error){
+      showToast(/anonymous|disabled/i.test(error.message||"")
+        ?"Guest access needs Anonymous Sign-Ins enabled in Supabase Auth settings."
+        :"Couldn't start guest chat: "+friendlyError(error));
+      return;
+    }
+    session=data.session;
+  }
+  if(session)await boot(session.user);
+}
 init();
+
