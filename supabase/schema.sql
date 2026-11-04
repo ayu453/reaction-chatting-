@@ -49,6 +49,8 @@ create table public.friend_requests (
 );
 create unique index friend_requests_one_per_pair
 on public.friend_requests (least(sender_id, receiver_id), greatest(sender_id, receiver_id));
+create index friend_requests_receiver_status_created on public.friend_requests (receiver_id, status, created_at desc);
+create index friend_requests_sender_status_created on public.friend_requests (sender_id, status, created_at desc);
 
 create or replace function public.protect_friend_request_update()
 returns trigger language plpgsql
@@ -78,6 +80,7 @@ create table public.messages (
   constraint messages_not_self check (sender_id <> recipient_id)
 );
 create index messages_conversation_created on public.messages (sender_id, recipient_id, created_at desc);
+create index messages_recipient_conversation_created on public.messages (recipient_id, sender_id, created_at desc);
 
 alter table public.profiles enable row level security;
 alter table public.friend_requests enable row level security;
