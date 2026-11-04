@@ -14,7 +14,7 @@ Open `index.html` from a static web host. The app loads the pinned `@supabase/su
 - Row Level Security on profiles, friend requests and messages.
 - Local message-to-song matching for four moods: romantic, comfort, celebration and playful.
 - Original Web Audio compositions play for exactly 10 seconds; message text stays on-device and is never sent to a music API.
-- Audio unlocks after the user's first tap/keypress, then matching incoming and outgoing messages can trigger the 10-second music cue automatically.
+- Audio is unlocked by the normal sign-in action or the user's first ordinary interaction with the app; no separate play/reaction button is shown. Matching incoming and outgoing messages then trigger the 10-second cue automatically. Browsers may still block sound until some normal user interaction has occurred.
 - Responsive three-panel chat UI and mobile contacts drawer.
 
 ## Supabase setup
