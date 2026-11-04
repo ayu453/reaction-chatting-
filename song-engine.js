@@ -64,8 +64,8 @@
       const start=context.currentTime+.06,step=2.5;
       theme.chords.forEach((chord,bar)=>{
         const at=start+bar*step;
-        chord.forEach((hz,index)=>tone(hz,at,2.38,"sine",index===0?.026:.014));
-        tone(chord[0]/2,at,2.38,"sine",.045);
+        chord.forEach((hz,index)=>tone(hz,at,2.44,"sine",index===0 ? 0.026 : 0.014));
+        tone(chord[0]/2,at,2.44,"sine",.045);
       });
       theme.melody.forEach((hz,index)=>{
         const at=start+index*.6;
