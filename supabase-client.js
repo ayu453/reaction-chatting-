@@ -1,0 +1,1 @@
+(function(){if(!window.supabase||!window.supabase.createClient){window.afterglowSupabase=null;return;}window.afterglowSupabase=window.supabase.createClient("https://smreuzsuxmgwaihvttpq.supabase.co","sb_publishable_gtF0DV1byIqau61BtZ7-2Q_ldMbmwje",{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});})();
