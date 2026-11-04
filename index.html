@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10121b">
+  <meta name="description" content="A messaging space where conversations have a little more personality.">
+  <title>Afterglow — chat with a reaction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-row"><div class="brand-mark">a<span>✳</span></div><div><div class="brand-name">afterglow</div><div class="brand-sub">CHAT, WITH A TWIST</div></div><button class="icon-button mobile-close" id="closeSidebar" aria-label="Close contacts">×</button></div>
+      <div class="profile-chip"><div class="avatar avatar-me">A</div><div class="profile-copy"><strong>Ayush</strong><span><i class="online-dot"></i> Online now</span></div><button class="dots" aria-label="Profile menu">···</button></div>
+      <div class="side-section-title"><span>YOUR SPACE</span><button class="tiny-add" id="newChat" title="New chat">＋</button></div>
+      <label class="search-box"><span>⌕</span><input id="friendSearch" placeholder="Find a friend..." autocomplete="off"></label>
+      <div class="filter-tabs"><button class="filter-tab active" data-filter="all">All <b>4</b></button><button class="filter-tab" data-filter="unread">Unread <b>2</b></button></div>
+      <div class="friend-list" id="friendList">
+        <button class="friend active" data-id="maya"><span class="avatar avatar-maya">M<span class="presence"></span></span><span class="friend-info"><strong>Maya Chen</strong><small>this is SO us 😭</small></span><span class="friend-meta"><time>2m</time><i class="unread-count">2</i></span></button>
+        <button class="friend" data-id="leo"><span class="avatar avatar-leo">L<span class="presence"></span></span><span class="friend-info"><strong>Leo Martin</strong><small>Voice message · 0:08</small></span><span class="friend-meta"><time>18m</time></span></button>
+        <button class="friend" data-id="zoya"><span class="avatar avatar-zoya">Z</span><span class="friend-info"><strong>Zoya Khan</strong><small>send me the playlist!!</small></span><span class="friend-meta"><time>1h</time><i class="unread-count">1</i></span></button>
+        <button class="friend" data-id="noah"><span class="avatar avatar-noah">N</span><span class="friend-info"><strong>Noah Williams</strong><small>You: haha deal</small></span><span class="friend-meta"><time>Yesterday</time></span></button>
+      </div>
+      <div class="sidebar-bottom"><div class="mini-status"><span class="pulse"></span><span><strong>Reaction engine</strong><small>Local mode · ready</small></span><span class="toggle on" aria-label="Reaction engine enabled"><i></i></span></div><div class="side-links"><button>⚙ Settings</button><button>♡ Invite friends</button></div><div class="privacy-note">Your demo chats stay on this device.</div></div>
+    </aside>
+
+    <main class="chat-area">
+      <header class="chat-header">
+        <button class="icon-button menu-button" id="openSidebar" aria-label="Open contacts">☰</button>
+        <div class="avatar avatar-maya header-avatar">M<span class="presence"></span></div>
+        <div class="chat-person"><strong id="chatName">Maya Chen</strong><span><i class="online-dot"></i><span id="chatStatus">Active now</span></span></div>
+        <div class="header-actions"><button class="header-action" title="Search conversation">⌕</button><button class="header-action" title="Voice call">⌕</button><button class="header-action more-action" title="More options">···</button></div>
+      </header>
+
+      <section class="conversation" id="conversation">
+        <div class="date-divider"><span>TODAY, 10:42 AM</span></div>
+        <div class="day-note">You and Maya have been friends for 2 years ✨</div>
+        <div class="message-row received"><div class="avatar avatar-maya tiny-avatar">M</div><div class="message-stack"><span class="sender">Maya</span><div class="bubble">okay I have a VERY important question</div><time>10:42</time></div></div>
+        <div class="message-row received"><div class="avatar avatar-maya tiny-avatar ghost-avatar">M</div><div class="message-stack"><div class="bubble">if we had to leave tonight and start a tiny café somewhere, where are we going?</div><time>10:42</time></div></div>
+        <div class="message-row sent"><div class="message-stack"><div class="bubble">Somewhere by the sea. No emails. Just coffee and questionable life choices.</div><time>10:43 <span class="read-check">✓✓</span></time></div></div>
+        <div class="message-row received"><div class="avatar avatar-maya tiny-avatar">M</div><div class="message-stack"><span class="sender">Maya</span><div class="bubble">THIS. this is SO us 😭</div><time>10:44</time></div></div>
+        <div class="message-row sent"><div class="message-stack"><div class="bubble">I’m naming it “No Thoughts, Just Toast”</div><time>10:44 <span class="read-check">✓✓</span></time></div></div>
+        <div class="message-row received"><div class="avatar avatar-maya tiny-avatar">M</div><div class="message-stack"><span class="sender">Maya</span><div class="bubble">STOP I would actually invest</div><time>10:45</time></div></div>
+        <div class="typing-indicator" id="typingIndicator" hidden><span class="avatar avatar-maya tiny-avatar">M</span><span class="typing-dots"><i></i><i></i><i></i></span><small>Maya is typing</small></div>
+      </section>
+
+      <div class="composer-wrap"><div class="composer-tools"><button title="Add attachment">＋</button><button title="GIFs">GIF</button><button title="Stickers">▧</button></div><form class="composer" id="messageForm"><textarea id="messageInput" rows="1" placeholder="Write something worth reacting to..." aria-label="Write a message"></textarea><button type="button" class="emoji-button" id="emojiButton" title="Add emoji">☺</button><button type="submit" class="send-button" aria-label="Send message">↑</button></form><div class="composer-hint">Enter to send <span>·</span> Shift + Enter for a new line</div></div>
+    </main>
+
+    <aside class="reaction-rail">
+      <div class="rail-heading"><span class="sparkle">✳</span><div><strong>THE AFTERGLOW</strong><small>little moments, amplified</small></div><span class="live-pill"><i></i> LIVE</span></div>
+      <div class="ambient-card" id="ambientCard"><div class="ambient-orbit orbit-one"></div><div class="ambient-orbit orbit-two"></div><div class="ambient-emoji" id="ambientEmoji">🌊</div><div class="ambient-caption"><span id="ambientTag">THE VIBE</span><strong id="ambientTitle">Coastal daydream</strong><small id="ambientText">Somewhere salty, sunny and far away.</small></div></div>
+      <div class="rail-section"><div class="section-heading"><strong>REACTION FEED</strong><span class="feed-count" id="feedCount">03</span></div><p class="rail-description">The chat's mood, translated into tiny moments.</p><div class="reaction-feed" id="reactionFeed"><div class="feed-item"><span class="feed-icon">🌊</span><div><strong>Coastal daydream</strong><small>Picked up on “by the sea”</small></div><time>now</time></div><div class="feed-item"><span class="feed-icon">☕</span><div><strong>Little café energy</strong><small>A shared imaginary plan</small></div><time>1m</time></div><div class="feed-item"><span class="feed-icon">😭</span><div><strong>That’s so us</strong><small>Peak best-friend chaos</small></div><time>2m</time></div></div></div>
+      <div class="engine-card"><div class="engine-top"><span class="engine-icon">✧</span><div><strong>Hybrid engine</strong><small>How reactions happen</small></div><span class="engine-state">ON</span></div><div class="engine-steps"><div><i>01</i><span><strong>Understand</strong><small>Local context + tone</small></span></div><div><i>02</i><span><strong>Choose</strong><small>Curated reaction library</small></span></div><div><i>03</i><span><strong>Bring it to life</strong><small>Quietly, behind your chat</small></span></div></div><div class="engine-foot">AI assist can be connected later for nuanced moments.</div></div>
+      <div class="rail-footer"><span>✦</span> A little more feeling in every conversation.</div>
+    </aside>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
