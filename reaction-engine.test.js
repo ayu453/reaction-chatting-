@@ -30,3 +30,14 @@ test("does not mutate the curated catalog", () => {
   assert.equal(Object.isFrozen(engine.catalog), true);
   assert.equal(Object.isFrozen(engine.catalog[0]), true);
 });
+
+test("every reaction exposes media slots without auto-playing assets", () => {
+  for (const reaction of engine.catalog) {
+    assert.ok(Array.isArray(reaction.media));
+    assert.ok(reaction.media.length > 0);
+    for (const slot of reaction.media) {
+      assert.equal(typeof slot.kind, "string");
+      assert.equal(slot.asset, null);
+    }
+  }
+});
