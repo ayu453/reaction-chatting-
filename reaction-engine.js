@@ -20,7 +20,17 @@
     { id: "big-yes", patterns: [/\b(wow|amazing|incredible|awesome|perfect|fantastic|brilliant)\b/i, /✨|🤩/], weight: 2, emoji: "✨", tag: "THE SPARK", title: "Big yes energy", text: "Some moments deserve extra sparkle.", feed: "Big yes energy", why: "Excitement detected", mediaType: "visual" }
   ];
 
-  catalog.forEach(item => { Object.freeze(item.patterns); Object.freeze(item); });
+  catalog.forEach(item => {
+    if (!item.media) {
+      item.media = item.mediaType === "audio-ready"
+        ? [{ kind: "audio", asset: null, fallback: "audio-placeholder" }, { kind: "visual", asset: null, fallback: "ambient" }]
+        : [{ kind: "animation", asset: null, fallback: "ambient" }, { kind: "meme", asset: null, fallback: "caption-card" }];
+    }
+    Object.freeze(item.media.forEach ? item.media.forEach(Object.freeze) : item.media);
+    Object.freeze(item.media);
+    Object.freeze(item.patterns);
+    Object.freeze(item);
+  });
 
   const fallback = { id: "little-moment", emoji: "✨", tag: "THE SPARK", title: "A little moment", text: "Every conversation has its own rhythm.", feed: "A little moment", why: "A new moment in the conversation", mediaType: "visual" };
 
