@@ -12,20 +12,15 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-shell">
+  <div class="auth-screen" id="authScreen"><div class="auth-card"><div class="auth-brand"><span class="brand-mark">a<span>✳</span></span><div><strong>afterglow</strong><small>CHAT, WITH A TWIST</small></div></div><span class="auth-eyebrow" id="authEyebrow">YOUR PEOPLE, YOUR SPACE</span><h1 id="authTitle">A little more feeling in every conversation.</h1><p id="authSubtitle">Sign in to pick up where the good conversations happen.</p><form id="authForm"><div id="signupFields" hidden><label>Your name<input id="authName" maxlength="40" placeholder="How friends know you" autocomplete="name"></label><label>Choose a username<input id="authUsername" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]{3,24}" placeholder="e.g. ayush_08" autocomplete="username"></label></div><label>Email address<input id="authEmail" type="email" required autocomplete="email" placeholder="you@example.com"></label><label>Password<input id="authPassword" type="password" required minlength="8" autocomplete="current-password" placeholder="At least 8 characters"></label><button class="auth-submit" id="authSubmit" type="submit">Sign in</button></form><button class="auth-switch" id="authSwitch" type="button">New to Afterglow? Create an account</button><p class="auth-message" id="authMessage" aria-live="polite"></p><small class="auth-footnote">Your conversations are private to their participants.</small></div></div><div class="app-shell" id="appShell" hidden>
     <aside class="sidebar">
       <div class="brand-row"><div class="brand-mark">a<span>✳</span></div><div><div class="brand-name">afterglow</div><div class="brand-sub">CHAT, WITH A TWIST</div></div><button class="icon-button mobile-close" id="closeSidebar" aria-label="Close contacts">×</button></div>
-      <div class="profile-chip"><div class="avatar avatar-me">A</div><div class="profile-copy"><strong>Ayush</strong><span><i class="online-dot"></i> Online now</span></div><button class="dots" aria-label="Profile menu">···</button></div>
+      <div class="profile-chip"><div class="avatar avatar-me">A</div><div class="profile-copy"><strong id="profileName">Your profile</strong><span><i class="online-dot"></i><span id="profileUsername">Connecting…</span></span></div><button class="dots" id="signOutButton" aria-label="Sign out" title="Sign out">↪</button></div>
       <div class="side-section-title"><span>YOUR SPACE</span><button class="tiny-add" id="newChat" title="New chat">＋</button></div>
       <label class="search-box"><span>⌕</span><input id="friendSearch" placeholder="Find a friend..." autocomplete="off"></label>
       <div class="filter-tabs"><button class="filter-tab active" data-filter="all">All <b>4</b></button><button class="filter-tab" data-filter="unread">Unread <b>2</b></button></div>
-      <div class="friend-list" id="friendList">
-        <button class="friend active" data-id="maya"><span class="avatar avatar-maya">M<span class="presence"></span></span><span class="friend-info"><strong>Maya Chen</strong><small>this is SO us 😭</small></span><span class="friend-meta"><time>2m</time><i class="unread-count">2</i></span></button>
-        <button class="friend" data-id="leo"><span class="avatar avatar-leo">L<span class="presence"></span></span><span class="friend-info"><strong>Leo Martin</strong><small>Voice message · 0:08</small></span><span class="friend-meta"><time>18m</time></span></button>
-        <button class="friend" data-id="zoya"><span class="avatar avatar-zoya">Z</span><span class="friend-info"><strong>Zoya Khan</strong><small>send me the playlist!!</small></span><span class="friend-meta"><time>1h</time><i class="unread-count">1</i></span></button>
-        <button class="friend" data-id="noah"><span class="avatar avatar-noah">N</span><span class="friend-info"><strong>Noah Williams</strong><small>You: haha deal</small></span><span class="friend-meta"><time>Yesterday</time></span></button>
-      </div>
-      <div class="sidebar-bottom"><div class="mini-status"><span class="pulse"></span><span><strong>Reaction engine</strong><small>Local mode · ready</small></span><span class="toggle on" aria-label="Reaction engine enabled"><i></i></span></div><div class="side-links"><button>⚙ Settings</button><button>♡ Invite friends</button></div><div class="privacy-note">Your demo chats stay on this device.</div></div>
+      <div class="friend-list" id="friendList"><div class="friend-empty">Your accepted friends will appear here.</div></div>
+      <div class="sidebar-bottom"><div class="mini-status"><span class="pulse"></span><span><strong>Reaction engine</strong><small>Local mode · ready</small></span><span class="toggle on" aria-label="Reaction engine enabled"><i></i></span></div><div class="side-links"><button>⚙ Settings</button><button>♡ Invite friends</button></div><div class="privacy-note" id="connectionNote">Connected to your private chat space.</div></div>
     </aside>
 
     <main class="chat-area">
@@ -60,8 +55,8 @@
       <div class="rail-footer"><span>✦</span> A little more feeling in every conversation.</div>
     </aside>
   </div>
-  <div class="toast" id="toast" role="status"></div>
-  <script src="reaction-media.js"></script><script src="reaction-visuals.js"></script>
+  <div class="people-overlay" id="peopleOverlay" hidden><section class="people-dialog" role="dialog" aria-modal="true" aria-labelledby="peopleTitle"><header><div><span class="auth-eyebrow">GROW YOUR CIRCLE</span><h2 id="peopleTitle">Find your people</h2></div><button class="icon-button" id="closePeople" aria-label="Close">×</button></header><label class="search-box people-search"><span>⌕</span><input id="peopleSearch" placeholder="Search by username…" autocomplete="off"></label><div class="people-results" id="peopleResults"><p class="people-empty">Search by username to find a friend.</p></div><div class="incoming-title">FRIEND REQUESTS <span id="requestCount">0</span></div><div class="people-results" id="incomingRequests"><p class="people-empty">No new requests.</p></div></section></div><div class="toast" id="toast" role="status"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script><script src="supabase-client.js"></script><script src="reaction-media.js"></script><script src="reaction-visuals.js"></script>
   <script src="reaction-engine.js"></script>
   <script src="app.js"></script>
 </body>
