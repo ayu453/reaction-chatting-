@@ -40,7 +40,7 @@
           say("10-second song moments enabled");
           if(pending){const next=pending;pending=null;play(next);}
         }
-      }).catch(()=>say("Tap once to enable 10-sec songs"));
+      }).catch(()=>say("Song will play automatically when audio is available"));
     }
     if(root.document){
       root.document.addEventListener("pointerdown",unlock,true);
@@ -59,7 +59,7 @@
       oscillator.onended=()=>{active=active.filter(x=>x!==oscillator);};
     }
     function play(theme){
-      if(!context||!unlocked||context.state!=="running"){pending=theme;say("Tap once to enable 10-sec song moments");return false;}
+      if(!context||!unlocked||context.state!=="running"){pending=theme;say("Song will play automatically when audio is available");return false;}
       clearActive();
       const start=context.currentTime+.06,step=2.5;
       theme.chords.forEach((chord,bar)=>{
