@@ -17,6 +17,6 @@ jobs:
         with:
           node-version: 20
       - name: Check application JavaScript syntax
-        run: node --check app.js && node --check supabase-client.js && node --check reaction-engine.js && node --check reaction-visuals.js
+        run: node --check app.js && node --check supabase-client.js && node --check reaction-engine.js && node --check reaction-visuals.js && node --check song-engine.js
       - name: Run reaction engine and visual tests
-        run: node --test reaction-engine.test.js reaction-visuals.test.js
+        run: node --test reaction-engine.test.js reaction-visuals.test.js song-engine.test.js
