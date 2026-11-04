@@ -16,5 +16,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Check application JavaScript syntax
+        run: node --check app.js && node --check supabase-client.js && node --check reaction-engine.js && node --check reaction-visuals.js
       - name: Run reaction engine and visual tests
         run: node --test reaction-engine.test.js reaction-visuals.test.js
