@@ -11,6 +11,13 @@ test("matches clear context to the expected curated reaction", () => {
   assert.equal(engine.classify("Send me that playlist").id, "soundtrack");
   assert.equal(engine.classify("Sorry you had such a rough day").id, "comfort");
   assert.equal(engine.classify("That was absolutely amazing").id, "big-yes");
+  assert.equal(engine.classify("Yaar kya mast joke tha 😂").id, "laughing-hours");
+  assert.equal(engine.classify("Aaj mood off hai, bahut tension hai").id, "comfort");
+  assert.equal(engine.classify("Tumhari bahut yaad aa rahi hai").id, "soft-spot");
+  assert.equal(engine.classify("Chalo chai pe milte hain").id, "little-cafe");
+  assert.equal(engine.classify("Bhai tu jeet gaya!").id, "victory-lap");
+  assert.equal(engine.classify("Ek gaana suna na").id, "soundtrack");
+  assert.equal(engine.classify("गज़ब कर दिया").id, "big-yes");
 });
 
 test("returns a calm fallback for empty or unrelated messages", () => {
