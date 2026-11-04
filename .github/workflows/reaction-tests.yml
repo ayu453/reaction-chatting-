@@ -16,5 +16,5 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Run reaction engine tests
-        run: node --test reaction-engine.test.js
+      - name: Run reaction engine and visual tests
+        run: node --test reaction-engine.test.js reaction-visuals.test.js
