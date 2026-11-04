@@ -6,7 +6,7 @@ A browser-first messaging app with a local hybrid reaction engine and Supabase-b
 Open `index.html` from a static web host. The app loads the pinned `@supabase/supabase-js@2.119.0` browser bundle and the project's public publishable key from `supabase-client.js`. No service-role key is used in the browser.
 
 ## Current features
-- Email/password sign-up and sign-in, with profile creation and unique usernames.
+- Passwordless email OTP sign-up and sign-in with 6-digit code verification, profile creation and unique usernames.
 - Search registered users by username and send friend requests.
 - Accept incoming friend requests; accepted connections appear in the contacts list.
 - Private one-to-one message history stored in Supabase Postgres.
@@ -25,7 +25,7 @@ Tables:
 
 RLS is enabled on every public table. The browser uses only the publishable key. Never add a Supabase secret/service-role key to this repository.
 
-**Email confirmation:** hosted Supabase projects commonly require users to confirm their email before first sign-in. Set the Supabase Auth Site URL and Redirect URLs to the actual hosted Afterglow URL before inviting users to register.
+**Email OTP setup (required):** In Supabase Dashboard → Authentication → Email Templates → Magic Link, replace the link-based template with a code template containing `{{ .Token }}` (for example: `<h2>Your Afterglow code</h2><p>Enter this 6-digit code in Afterglow: {{ .Token }}</p>`). The app calls `signInWithOtp()` and `verifyOtp()`; users do not need to open a confirmation link. Set Auth rate limits appropriately and configure the project's email delivery provider for production.
 
 ## Tests
 GitHub Actions checks the browser JavaScript syntax and runs the reaction engine/visual tests on pushes to `main` and pull requests. Use Node.js 20+ locally:
