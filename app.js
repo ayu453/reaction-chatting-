@@ -11,6 +11,7 @@ function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','
 function classify(text){ return window.AfterglowReactionEngine.classify(text); }
 function updateReaction(text){
  const r=classify(text);
+ updateMediaStatus(r);
  $('#ambientEmoji').textContent=r.emoji; $('#ambientTag').textContent=r.tag; $('#ambientTitle').textContent=r.title; $('#ambientText').textContent=r.text;
  $('#ambientCard').animate([{filter:'brightness(1)'},{filter:'brightness(1.28)'},{filter:'brightness(1)'}],{duration:650});
  const item=document.createElement('div');item.className='feed-item new-feed';
@@ -42,3 +43,22 @@ $('#newChat').addEventListener('click',()=>showToast('Friend search is coming in
 $('#openSidebar').addEventListener('click',()=>$('.sidebar').classList.add('open'));
 $('#closeSidebar').addEventListener('click',()=>$('.sidebar').classList.remove('open'));
 $('#conversation').addEventListener('click',()=>$('.sidebar').classList.remove('open'));
+
+function updateMediaStatus(reaction){
+ const audio=$('#reactionAudio'),button=$('#mediaPlay');
+ audio.pause();audio.removeAttribute('src');audio.load();
+ button.disabled=true;button.textContent='▶';
+ const slots=Array.isArray(reaction.media)?reaction.media:[];
+ const kinds=[...new Set(slots.map(slot=>slot.kind))];
+ const hasAudio=slots.some(slot=>slot.kind==='audio'&&slot.asset&&typeof slot.asset==='string');
+ $('#mediaStatusTitle').textContent=hasAudio?'Audio reaction available':(kinds.includes('animation')?'Animated visual ready':kinds.includes('meme')?'Meme reaction slot ready':'Visual reaction ready');
+ $('#mediaStatusText').textContent=hasAudio?'Tap play when you want to hear it':(kinds.length?'Curated '+kinds.join(' + ')+' assets can be attached here':'Ambient visual reaction');
+ if(hasAudio){
+  const source=slots.find(slot=>slot.kind==='audio'&&slot.asset).asset;
+  if(/^(https:\/\/|\/|\.\/)/i.test(source)){
+   audio.src=source;button.disabled=false;
+   button.onclick=()=>{if(audio.paused){audio.play().then(()=>button.textContent='Ⅱ').catch(()=>showToast('Audio could not be played.'));}else{audio.pause();button.textContent='▶';}};
+   audio.onended=()=>button.textContent='▶';
+  }
+ } else { button.onclick=()=>{}; }
+}
