@@ -12,12 +12,25 @@ function classify(text){ return window.AfterglowReactionEngine.classify(text); }
 function updateReaction(text){
  const r=classify(text);
  updateMediaStatus(r);
+ renderVisualReaction(r);
  $('#ambientEmoji').textContent=r.emoji; $('#ambientTag').textContent=r.tag; $('#ambientTitle').textContent=r.title; $('#ambientText').textContent=r.text;
  $('#ambientCard').animate([{filter:'brightness(1)'},{filter:'brightness(1.28)'},{filter:'brightness(1)'}],{duration:650});
  const item=document.createElement('div');item.className='feed-item new-feed';
  item.innerHTML='<span class="feed-icon">'+r.emoji+'</span><div><strong>'+escapeHTML(r.feed)+'</strong><small>'+escapeHTML(r.why)+'</small></div><time>now</time>';
  $('#reactionFeed').prepend(item);while($('#reactionFeed').children.length>4)$('#reactionFeed').lastElementChild.remove();
  $('#feedCount').textContent=String($('#reactionFeed').children.length).padStart(2,'0');
+}
+function renderVisualReaction(reaction){
+ const visual=window.AfterglowVisuals.buildVisual(reaction);
+ const scene=$('#visualScene'),card=$('#memeVisual');
+ scene.dataset.theme=visual.theme;card.dataset.theme=visual.theme;
+ $('#memeStamp').textContent=visual.stamp;
+ $('#memeSticker').textContent=visual.sticker;
+ $('#memeHeadline').textContent=visual.headline;
+ $('#memeCaption').textContent=visual.caption;
+ card.classList.remove('visual-pop');scene.classList.remove('scene-refresh');
+ void card.offsetWidth;
+ card.classList.add('visual-pop');scene.classList.add('scene-refresh');
 }
 function renderChat(id){
  activeId=id;const p=profiles[id];$('#chatName').textContent=p.name;$('#chatStatus').textContent=p.status;
