@@ -3,14 +3,15 @@
 A frontend-first messaging prototype built around a **hybrid reaction engine**.
 
 ## Run it
-Open `index.html` in a browser. No build step is required. To run the engine tests, use Node.js 18+ with `node --test reaction-engine.test.js`.
+Open `index.html` in a browser. No build step is required. To run the engine tests, use Node.js 18+ with `node --test reaction-engine.test.js reaction-visuals.test.js`.
 
 ## What's in this first prototype
 - Responsive three-panel chat interface with a contacts list, conversation and reaction rail.
 - Local demo conversations and message composer.
 - A standalone local-first hybrid reaction engine with weighted context matching and a curated, media-ready reaction catalog.
+- An original CSS-based visual reaction renderer with eight themed animated scenes and generated reaction cards (no external meme/song assets required).
 - A media slot contract for ambient visuals, animations, meme cards, audio and short video, plus a non-intrusive media status panel and explicit tap-to-play audio hook.
-- Automated Node.js tests for reaction matching, fallback behavior and deterministic scoring.
+- Automated Node.js tests for reaction matching, fallback behavior, deterministic scoring and visual scene mapping.
 - Reactions appear in the dedicated ambient panel and reaction feed — never on top of message bubbles.
 - Mobile contacts drawer and friend filtering.
 
