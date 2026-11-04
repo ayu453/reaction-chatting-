@@ -54,12 +54,14 @@
     <aside class="reaction-rail">
       <div class="rail-heading"><span class="sparkle">✳</span><div><strong>THE AFTERGLOW</strong><small>little moments, amplified</small></div><span class="live-pill"><i></i> LIVE</span></div>
       <div class="ambient-card" id="ambientCard"><div class="ambient-orbit orbit-one"></div><div class="ambient-orbit orbit-two"></div><div class="ambient-emoji" id="ambientEmoji">🌊</div><div class="ambient-caption"><span id="ambientTag">THE VIBE</span><strong id="ambientTitle">Coastal daydream</strong><small id="ambientText">Somewhere salty, sunny and far away.</small></div></div>
+      <div class="media-status" id="mediaStatus" aria-live="polite"><span class="media-status-icon">✧</span><span><strong id="mediaStatusTitle">Visual reaction ready</strong><small id="mediaStatusText">Media slots are ready for curated assets</small></span><button id="mediaPlay" type="button" disabled title="Audio will be available when a licensed asset is added">▶</button></div><audio id="reactionAudio" preload="none"></audio>
       <div class="rail-section"><div class="section-heading"><strong>REACTION FEED</strong><span class="feed-count" id="feedCount">03</span></div><p class="rail-description">The chat's mood, translated into tiny moments.</p><div class="reaction-feed" id="reactionFeed"><div class="feed-item"><span class="feed-icon">🌊</span><div><strong>Coastal daydream</strong><small>Picked up on “by the sea”</small></div><time>now</time></div><div class="feed-item"><span class="feed-icon">☕</span><div><strong>Little café energy</strong><small>A shared imaginary plan</small></div><time>1m</time></div><div class="feed-item"><span class="feed-icon">😭</span><div><strong>That’s so us</strong><small>Peak best-friend chaos</small></div><time>2m</time></div></div></div>
       <div class="engine-card"><div class="engine-top"><span class="engine-icon">✧</span><div><strong>Hybrid engine</strong><small>How reactions happen</small></div><span class="engine-state">ON</span></div><div class="engine-steps"><div><i>01</i><span><strong>Understand</strong><small>Local context + tone</small></span></div><div><i>02</i><span><strong>Choose</strong><small>Curated reaction library</small></span></div><div><i>03</i><span><strong>Bring it to life</strong><small>Quietly, behind your chat</small></span></div></div><div class="engine-foot">AI assist can be connected later for nuanced moments.</div></div>
       <div class="rail-footer"><span>✦</span> A little more feeling in every conversation.</div>
     </aside>
   </div>
   <div class="toast" id="toast" role="status"></div>
+  <script src="reaction-media.js"></script>
   <script src="reaction-engine.js"></script>
   <script src="app.js"></script>
 </body>
