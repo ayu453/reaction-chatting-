@@ -26,7 +26,7 @@
         ? [{ kind: "audio", asset: null, fallback: "audio-placeholder" }, { kind: "visual", asset: null, fallback: "ambient" }]
         : [{ kind: "animation", asset: null, fallback: "ambient" }, { kind: "meme", asset: null, fallback: "caption-card" }];
     }
-    Object.freeze(item.media.forEach ? item.media.forEach(Object.freeze) : item.media);
+    item.media.forEach(slot => Object.freeze(slot));
     Object.freeze(item.media);
     Object.freeze(item.patterns);
     Object.freeze(item);
