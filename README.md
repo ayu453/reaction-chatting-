@@ -12,8 +12,9 @@ Open `index.html` from a static web host. The app loads the pinned `@supabase/su
 - Private one-to-one message history stored in Supabase Postgres.
 - Supabase Realtime delivery for incoming messages and friend-request updates.
 - Row Level Security on profiles, friend requests and messages.
-- Local-first hybrid reaction matching with eight original CSS-animated visual themes.
-- Reaction visuals stay in the dedicated side rail; audio is never autoplayed.
+- Local message-to-song matching for four moods: romantic, comfort, celebration and playful.
+- Original Web Audio compositions play for exactly 10 seconds; message text stays on-device and is never sent to a music API.
+- Audio unlocks after the user's first tap/keypress, then matching incoming and outgoing messages can trigger the 10-second music cue automatically.
 - Responsive three-panel chat UI and mobile contacts drawer.
 
 ## Supabase setup
@@ -37,5 +38,5 @@ node --test reaction-engine.test.js reaction-visuals.test.js
 
 ## Not yet included
 - Group chats, attachments, voice/video calls, message edits/deletes, read receipts and push notifications.
-- Real licensed meme, GIF, song or video assets; current visual reactions are original CSS scenes.
+- Commercial/popular song catalog and licensed recordings. Current 10-second cues are original synthesized melodies, not copyrighted song excerpts.
 - Optional server-side AI interpretation. The current reaction engine runs locally and does not send chat text to an AI service.
