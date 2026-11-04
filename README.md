@@ -1,32 +1,40 @@
-# Afterglow — chat, with a twist
+# Afterglow — chat, with a reaction
 
-A frontend-first messaging prototype built around a **hybrid reaction engine**.
+A browser-first messaging app with a local hybrid reaction engine and Supabase-backed accounts, friends, private messages and Realtime delivery.
 
 ## Run it
-Open `index.html` in a browser. No build step is required. To run the engine tests, use Node.js 18+ with `node --test reaction-engine.test.js reaction-visuals.test.js`.
+Open `index.html` from a static web host. The app loads the pinned `@supabase/supabase-js@2.119.0` browser bundle and the project's public publishable key from `supabase-client.js`. No service-role key is used in the browser.
 
-## What's in this first prototype
-- Responsive three-panel chat interface with a contacts list, conversation and reaction rail.
-- Local demo conversations and message composer.
-- A standalone local-first hybrid reaction engine with weighted context matching and a curated, media-ready reaction catalog.
-- An original CSS-based visual reaction renderer with eight themed animated scenes and generated reaction cards (no external meme/song assets required).
-- A media slot contract for ambient visuals, animations, meme cards, audio and short video, plus a non-intrusive media status panel and explicit tap-to-play audio hook.
-- Automated Node.js tests for reaction matching, fallback behavior, deterministic scoring and visual scene mapping.
-- Reactions appear in the dedicated ambient panel and reaction feed — never on top of message bubbles.
-- Mobile contacts drawer and friend filtering.
+## Current features
+- Email/password sign-up and sign-in, with profile creation and unique usernames.
+- Search registered users by username and send friend requests.
+- Accept incoming friend requests; accepted connections appear in the contacts list.
+- Private one-to-one message history stored in Supabase Postgres.
+- Supabase Realtime delivery for incoming messages and friend-request updates.
+- Row Level Security on profiles, friend requests and messages.
+- Local-first hybrid reaction matching with eight original CSS-animated visual themes.
+- Reaction visuals stay in the dedicated side rail; audio is never autoplayed.
+- Responsive three-panel chat UI and mobile contacts drawer.
 
-## Hybrid engine plan
-1. **Local understanding:** fast, private keyword/context heuristics for common moments.
-2. **Curated library:** choose an appropriate visual/audio/meme reaction from approved assets.
-3. **AI assist (later):** optional server-side interpretation for nuanced context; not called for every message.
+## Supabase setup
+The schema is applied to project `smreuzsuxmgwaihvttpq`. The reproducible SQL is in `supabase/schema.sql`.
+Tables:
+- `profiles` — public-to-signed-in display name and username only.
+- `friend_requests` — pending, accepted and rejected requests.
+- `messages` — direct messages between accepted friends.
 
-## Current limitations
-- This is a UI prototype. Messages are held in browser memory and reset on refresh.
-- No database, authentication, real friend requests, cross-device sync, or real-time transport is connected yet.
-- AI assist and licensed media files are not connected yet. The catalog and UI now support media slots, but the slots remain empty until approved assets are added. Audio never auto-plays; it requires a user tap.
+RLS is enabled on every public table. The browser uses only the publishable key. Never add a Supabase secret/service-role key to this repository.
 
-## Next milestones
-1. Refine the reaction library and background presentation.
-2. Add friend discovery and profile flows.
-3. Add real-time messaging and persistence when explicitly approved.
-4. Add optional AI-assisted interpretation with privacy and cost controls.
+**Email confirmation:** hosted Supabase projects commonly require users to confirm their email before first sign-in. Set the Supabase Auth Site URL and Redirect URLs to the actual hosted Afterglow URL before inviting users to register.
+
+## Tests
+Use Node.js 20+:
+```sh
+node --check app.js
+node --test reaction-engine.test.js reaction-visuals.test.js
+```
+
+## Not yet included
+- Group chats, attachments, voice/video calls, message edits/deletes, read receipts and push notifications.
+- Real licensed meme, GIF, song or video assets; current visual reactions are original CSS scenes.
+- Optional server-side AI interpretation. The current reaction engine runs locally and does not send chat text to an AI service.
